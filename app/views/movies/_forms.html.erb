@@ -1,0 +1,29 @@
+
+<%=form_for(@movies) do |f|%>
+  <table>
+    <tr>
+      <th align="left"><%=f.label :image_file_name%></th><td align="left"><%=f.text_field :image_file_name%></td>
+    </tr>
+    <tr>
+      <th align="left"><%=f.label :title%></th><td align="left"><%=f.text_field :title%></td>
+    </tr>
+    <tr>
+      <th align="left"><%=f.label :rating%></th><td align="left"><%=f.text_field :rating%></td>
+    </tr>
+    <tr>
+      <th align="left"><%=f.label :released_on%></th><td align="left"><%=f.date_field :released_on, required:true, default: Date.today%></td>
+    </tr>
+    <tr>
+      <th align="left"><%=f.label :description%></th><td align="left"><%=f.text_area :description%></td>
+    </tr>
+    <tr>
+      <th align="left"><%=f.label :rank%></th><td align="left"><%=f.text_field :rank%> / 10</td>
+    </tr>
+    <tr>
+      <th align="left"><%=f.label :total_gross%></th><td align="left"><%=f.text_field :total_gross%></td>
+    </tr>
+    <tr>
+      <th></th><td><%= f.submit %></td>
+    </tr>
+  </table><br /><br />
+<% end %>

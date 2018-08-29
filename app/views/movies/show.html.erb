@@ -1,0 +1,24 @@
+<article>
+  <header>
+    <h1><%= @movies.title %></h1>
+  </header>
+  <h3>Description</h2>
+  <p style="width:20%;">
+    <%= @movies.description %> - Stars: <%= @movies.rank%>/10
+  </p>
+  <h3>Rated</h3>
+  <p>
+    <%= @movies.rating %>
+  </p>
+  <h3>Released On</h3>
+  <p>
+    <%= @movies.released_on %>
+  </p>
+  <h3>Total Gross</h3>
+  <p>
+    <%= format_total_gross(@movies.total_gross) %>
+  </p>
+</article>
+
+<%= link_to("All Movies", movies_path) %> | <%= link_to("Edit", edit_movie_path(@movies)) %> | <%= link_to("Delete", movie_path(@movies), method: :delete,
+                    data: {confirm: "Are you positive?"})%>
