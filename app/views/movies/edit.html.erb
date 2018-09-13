@@ -1,6 +1,5 @@
-<h1>You are editing <span style="color:purple;"><%= @movies.title %></span></h1>
+<header id="content-header">
+  <h1>Editing <%= @movie.title %></h1>
+</header>
 
-<%=render "forms"%>
-
-
------------> <%= link_to("All Movies", movies_path) %><br />
+<%= render 'form' %>

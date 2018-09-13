@@ -1,30 +1,31 @@
-<h1><%= pluralize(@movies.size, "Movie")%></h1>
-<h5><%=link_to("+ Add a New Movie", new_movie_path(@movies))%></h5>
-
-<% @movies.each do |movie| %>
-  <article style="float:left">
-    <%= %>
-  </article>
-  <article style="float:right">
-    <header>
-      <h2><%= link_to(movie.title, movie) %> (<%=movie.rating%>)</strong></h2>
-    </header>
-
-    <table width="auto">
-      <tr>
-        <th align="left">Review Rank:</th><td align="right"><%=movie.rank%> / 10</td>
-      </tr>
-      <tr>
-        <th align="left">Plot:</th><td align="right"><%= truncate(movie.description, length: 40, separator: " ") %></td>
-      </tr>
-      <tr>
-        <th align="left">Release Date:</th><td align="right"><%=movie.released_on%> (<%=time_ago_in_words(movie.released_on)%> ago) </td>
-      </tr>
-      <tr>
-        <th align="left">Box Office Sales:</th><td align="right"><%=format_total_gross(movie.total_gross)%></td>
-      </tr>
-    </table>
-
-  </article><br />
-  <span style="font-size:12px"><%= link_to("Edit this movie", edit_movie_path(movie)) %> | <%= link_to("Delete", movie_path(movie), method: :delete, data: {confirm: "Are you positive?"})%></span><br /><br />
+<ul id="movies">
+  <% @movies.each do |movie| %>
+    <li>
+      <article class="movie">
+        <header>
+          <%= image_for(movie) %>
+          <h2><%= link_to movie.title, movie %> (<%= movie.released_on.to_date %>)</h2>
+          <h3><%= movie.cast %></h3>
+        </header>
+        <p>
+          <%= truncate(movie.description, length: 150, separator: ' ') %>
+        </p>
+        <table>
+            <th>Rating</th>
+            <td><%= movie.rating %></td>
+          </tr>
+          <tr>
+            <th>Duration</th>
+            <td><%= movie.duration %></td>
+          </tr>
+          <tr>
+            <th>Total Gross</th>
+            <td><%= format_total_gross(movie) %></td>
+          </tr>
+        </table>
+        <footer>
+        </footer>
+      </article>
+    </li>
   <% end %>
+</ul>

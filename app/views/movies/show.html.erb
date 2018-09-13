@@ -1,24 +1,48 @@
-<article>
+<article id="movie" class="movie">
   <header>
-    <h1><%= @movies.title %></h1>
+    <%= image_for(@movie) %>
+    <h1><%= @movie.title %></h1>
+    <h2>Released: <%= @movie.released_on.to_date %></h2>
   </header>
-  <h3>Description</h2>
-  <p style="width:20%;">
-    <%= @movies.description %> - Stars: <%= @movies.rank%>/10
-  </p>
-  <h3>Rated</h3>
+
   <p>
-    <%= @movies.rating %>
+    <%= @movie.description %>
   </p>
-  <h3>Released On</h3>
+
+  <h3 class="no-rule">
+    <%= @movie.rating %> &bull; <%= @movie.duration %>
+  </h3>
+
+  <h3>Average Review</h3>
+    <p>
+      <%= format_average_stars(@movie) %>
+    </p>
+
+  <h3>Cast</h3>
   <p>
-    <%= @movies.released_on %>
+    <%= @movie.cast %>
   </p>
+
+  <h3>Director</h3>
+  <p>
+    <%= @movie.director %>
+  </p>
+
   <h3>Total Gross</h3>
   <p>
-    <%= format_total_gross(@movies.total_gross) %>
+    <%= format_total_gross(@movie) %>
   </p>
-</article>
 
-<%= link_to("All Movies", movies_path) %> | <%= link_to("Edit", edit_movie_path(@movies)) %> | <%= link_to("Delete", movie_path(@movies), method: :delete,
-                    data: {confirm: "Are you positive?"})%>
+  <footer>
+    <nav>
+      <%= link_to pluralize(@movie.reviews.size, 'reviews'), movie_reviews_path(@movie), class: 'button' %>
+      <%= link_to 'Edit', edit_movie_path(@movie), class: 'button' %>
+      <%= link_to 'Delete', @movie,
+                  class: 'button',
+                  method: :delete, data: { confirm: 'Are you sure?' } %>
+    </nav><br/><br/>
+
+    <%= link_to "+ Write Review", new_movie_review_path(@movie),
+           class: 'button ok review' %>
+  </footer>
+</article>

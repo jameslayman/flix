@@ -1,24 +1,33 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe "Viewing an individual movie" do
 
   it "shows the movie's details" do
-    movie = Movie.create(title: "Superman",
-                          rating: "G",
-                          description: "Super fast, super crappy!",
-                          released_on: "2007-08-05",
-                          total_gross: 30000000.0,
-                          rank: 3)
+    movie = Movie.create(movie_attributes(total_gross: 300000000.00))
 
     visit movie_url(movie)
 
     expect(page).to have_text(movie.title)
-
     expect(page).to have_text(movie.rating)
+    expect(page).to have_text("$300,000,000.00")
     expect(page).to have_text(movie.description)
     expect(page).to have_text(movie.released_on)
+  end
 
-    expect(page).to have_text("3/10")
+  it "shows the total gross if the total gross exceeds $50M" do
+    movie = Movie.create(movie_attributes(total_gross: 60000000.00))
+    
+    visit movie_url(movie)
+    
+    expect(page).to have_text("$60,000,000.00")
+  end
+
+  it "shows 'Flop!' if the total gross is less than $50M" do
+    movie = Movie.create(movie_attributes(total_gross: 40000000.00))
+
+    visit movie_url(movie)
+
+    expect(page).to have_text("Flop!")
   end
 
 end
